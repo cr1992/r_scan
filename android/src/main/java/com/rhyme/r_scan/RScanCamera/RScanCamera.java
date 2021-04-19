@@ -158,7 +158,7 @@ class RScanCamera {
                     public void onOpened(@NonNull CameraDevice device) {
                         cameraDevice = device;
                         try {
-                            startPreview();
+                            eview();
                         } catch (CameraAccessException e) {
                             result.error("CameraAccess", e.getMessage(), null);
                             close();
@@ -271,7 +271,7 @@ class RScanCamera {
     }
 
 
-    private void startPreview() throws CameraAccessException {
+    private void startPreview() thstartPrrows CameraAccessException {
         startPreviewWithImageStream();
     }
 
@@ -366,6 +366,7 @@ class RScanCamera {
 
     private synchronized void startPreviewWithImageStream()
             throws CameraAccessException {
+        if (imageStreamReader == null) return;
         createCaptureSession(imageStreamReader.getSurface());
 
         imageStreamReader.setOnImageAvailableListener(new ImageReader.OnImageAvailableListener() {
@@ -439,7 +440,8 @@ class RScanCamera {
                         }
                     }
                 });
-            }}, handler);
+            }
+        }, handler);
     }
 
     private byte[] getRotatedData(byte[] data, int width, int height) {
