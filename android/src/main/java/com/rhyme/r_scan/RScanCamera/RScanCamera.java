@@ -366,6 +366,7 @@ class RScanCamera {
 
     private synchronized void startPreviewWithImageStream()
             throws CameraAccessException {
+        if (imageStreamReader == null) return;
         createCaptureSession(imageStreamReader.getSurface());
 
         imageStreamReader.setOnImageAvailableListener(new ImageReader.OnImageAvailableListener() {
@@ -439,7 +440,8 @@ class RScanCamera {
                         }
                     }
                 });
-            }}, handler);
+            }
+        }, handler);
     }
 
     private byte[] getRotatedData(byte[] data, int width, int height) {
